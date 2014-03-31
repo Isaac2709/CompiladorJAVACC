@@ -1,5 +1,6 @@
 options {
-  JAVA_UNICODE_ESCAPE = true;
+  JDK_VERSION = "1.5";
+  static = false;
 }
 
 PARSER_BEGIN(MiniJavaParser)
@@ -8,7 +9,7 @@ PARSER_BEGIN(MiniJavaParser)
 	  public static void main(String args[]) {
 	    MiniJavaParser parser;
 	      try {
-	        System.out.println("MiniJava parsing from '" + args[0] + "' file...");
+	        System.out.println("MiniJava parsing from file...");
 	        parser = new MiniJavaParser(new java.io.FileInputStream("Prueba.txt"));
 	      } catch (java.io.FileNotFoundException e) {
 	        System.out.println("Error: File not found.");
@@ -85,8 +86,8 @@ TOKEN :
 TOKEN : /* LITERALS */
 {
   < INTEGER_LITERAL: ( ["1"-"9"] (["0"-"9"])* | "0" ) >
-| < CHAR_LITERAL: ( (["a"-"z"])| (["A"-"Z"]) ) >
-| < STRING_LITERAL: ( ["1"-"9"] (["0"-"9"])* | "0" ) >
+| < CHAR_LITERAL: ("'" (["a"-"z"])| (["A"-"Z"]) ["0"-"9"]"'") >
+| < STRING_LITERAL: ( "\"" ( (["A"-"Z"]) | (["0"-"9"]) | (["a"-"z"]) )* "\"") >
 }
 
 TOKEN : /* IDENTIFIERS */
@@ -143,7 +144,7 @@ void Goal() :
 {
   (ImportDeclaration())*
   MainClass()
-  ( TypeDeclaration() )*
+  (TypeDeclaration() )*
   <EOF>
 }
 
@@ -321,7 +322,7 @@ void AssigmentRest():
 {}
 {
   Expression()
-| "(" Type() ")" "System.in.read" "("")"
+| "(" Type() ")" "System.in.read" "(" ")"
 }
 
 void IfStatement() :
