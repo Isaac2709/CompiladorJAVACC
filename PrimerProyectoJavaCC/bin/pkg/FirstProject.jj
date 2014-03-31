@@ -1,6 +1,7 @@
 options {
-  JDK_VERSION = "1.5";
-  static = false;
+  /*JDK_VERSION = "1.5";
+  static = false;*/
+  JAVA_UNICODE_ESCAPE = true;
 }
 
 PARSER_BEGIN(MiniJavaParser)
