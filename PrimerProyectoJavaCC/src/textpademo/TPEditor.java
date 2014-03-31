@@ -73,6 +73,7 @@ public class TPEditor {
  
     private JButton buttonUndo;    //instancias de algunos botones que necesitan ser accesibles
     private JButton buttonRedo;
+    private JButton buttonCompilar;	//Boton para compilar el proyecto
  
     private JLabel sbFilePath;    //etiqueta que muestra la ubicación del archivo actual
     private JLabel sbFileSize;    //etiqueta que muestra el tamaño del archivo actual
@@ -368,6 +369,11 @@ public class TPEditor {
         buttonOpen.setToolTipText("Abrir");
         buttonOpen.setIcon(new ImageIcon(getClass().getResource("/res/tp_open.png")));
         buttonOpen.setActionCommand("cmd_open");
+        
+        JButton buttonComp = new JButton();
+        buttonComp.setToolTipText("Compilar");
+        buttonComp.setIcon(new ImageIcon(getClass().getResource("/res/tp_compi.png")));
+        buttonComp.setActionCommand("cmd_open");
  
         JButton buttonSave = new JButton();
         buttonSave.setToolTipText("Guardar");
@@ -415,6 +421,8 @@ public class TPEditor {
         jToolBar.add(buttonOpen);
         jToolBar.add(buttonSave);
         jToolBar.add(buttonSaveAs);
+        jToolBar.addSeparator();    //añade separadores entre algunos botones
+        jToolBar.add(buttonComp);
         jToolBar.addSeparator();    //añade separadores entre algunos botones
         jToolBar.add(buttonPrint);
         jToolBar.addSeparator();
