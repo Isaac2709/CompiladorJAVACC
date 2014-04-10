@@ -1,7 +1,7 @@
 options {
-  /*JDK_VERSION = "1.5";
-  static = false;*/
-  JAVA_UNICODE_ESCAPE = true;
+  JDK_VERSION = "1.5";
+  static = false;
+  /*JAVA_UNICODE_ESCAPE = true;*/
 }
 
 PARSER_BEGIN(MiniJavaParser)
@@ -44,6 +44,7 @@ SPECIAL_TOKEN : /* COMMENTS */
   <SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
 | <FORMAL_COMMENT: "/**" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
 | <MULTI_LINE_COMMENT: "/*" (~["*"])* "*" ("*" | (~["*","/"] (~["*"])* "*"))* "/">
+
 }
 
 TOKEN : 
@@ -89,6 +90,7 @@ TOKEN : /* LITERALS */
   < INTEGER_LITERAL: ( ["1"-"9"] (["0"-"9"])* | "0" ) >
 | < CHAR_LITERAL: ("'" (["a"-"z"])| (["A"-"Z"]) ["0"-"9"]"'") >
 | < STRING_LITERAL: ( "\"" ( (["A"-"Z"]) | (["0"-"9"]) | (["a"-"z"]) )* "\"") >
+//| < TID: <LETTER> (<LETTER>|<DIGIT>)* >
 }
 
 TOKEN : /* IDENTIFIERS */
@@ -145,11 +147,11 @@ void Goal() :
 {
   (ImportDeclaration())*
   MainClass()
-  (TypeDeclaration() )*
+  (TypeDeclaration())*
   <EOF>
 }
 
-void ImportDeclaration() :
+void ImportDeclaration():
 {}
 {
   SingleImportDeclaration()
